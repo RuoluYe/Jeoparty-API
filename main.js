@@ -33,32 +33,36 @@
   "updated_at":"2014-02-14T02:07:43.351Z",
   "clues_count":5}}
   /**
-   *  CHANGE: Describe what your init function does here.
+   *  initialize the jeoparty game and check the guessed answer for the
+   *  displayed question.
    */
   function init() {
-    // THIS IS THE CODE THAT WILL BE EXECUTED ONCE WEBPAGE LOADS
+    document.getElementById("guess").addEventListener("click", guessing);
   }
 
   /**
    * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
    */
-  function makeRequest() {
-    let url = URL_BASE; // if no params needed in request url
-    //let url = URL_BASE + "?query0=value0&query1=value1..."; // two or more query/value pairs, joined by &
+  function guessing() {
+    let url = URL_BASE + "?query0=value0&query1=value1...";
     fetch(url)
       .then(checkStatus)
-    //.then(JSON.parse)       // uncomment if response returns JSON format instead of text
-      .then(successFunction)
-      .catch(console.log);    // use console.log or replace with more user-friendly error function
-                              // (required in some assignments)
+      .then(JSON.parse)
+      .then(showResult)
+      .catch(handleError);
   }
 
   /**
    * Step 2: Write a function to do something with the response (if successful)
+   * @param {object} response - JSON object
    */
-  function successFunction(responseData) {
+  function showResult(response) {
     // responseData is string if you didn't include JSON.parse in fetch call chain, else JSON object
     // now play with your responseData! (build DOM, display messages, etc.)
+  }
+
+  function handleError(error){
+
   }
 
   /* ------------------------------ Helper Functions  ------------------------------ */

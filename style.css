@@ -7,9 +7,39 @@
   It is used to give the site a beautiful and organzing look.
 */
 body {
-  background-color: #71b3d0;
+  background-color: #b5dbec;
 }
+
 header {
   background-color: white;
   border-radius: 0.8em;
+  width: 70%;
+  margin: auto;
+  padding: 10px;
+  font-size: 25px;
+  text-align: center;
+}
+
+article {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+section {
+  border: 2px solid #5394b2;
+  padding: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+input {
+  width: 100px;
+  height: 10px;
+
+}
+
+#answer * {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
 }
