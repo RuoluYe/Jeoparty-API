@@ -9,68 +9,49 @@
 
   // MODULE GLOBAL VARIABLES, CONSTANTS, AND HELPER FUNCTIONS CAN BE PLACED
   // HERE
-  const API_URL = "http://jservice.io/api"; // it's good to factor out your url base as a constant
-  const jeoparty;
+  const URL_BASE = "http://jservice.io/api"; // it's good to factor out your url base as a constant
+  let JEOPARTY; // the JSON object of the trivia question
+  const TOTAL_QUESTION_COUNT = 156800;
+
   /**
    *  Add a function that will be called when the window is loaded.
    */
-  window.addEventListener("load", guessing);
-
-{"id":101163,
-"answer":"the Rockefeller Center",
-"question":"Named for a millionaire, this art deco area covers 11 acres in the middle of Manhattan",
-"value":1000,
-"airdate":"2009-09-25T12:00:00.000Z",
-"created_at":"2014-02-14T02:07:44.579Z",
-"updated_at":"2014-02-14T02:07:44.579Z",
-"category_id":13569,
-"game_id":null,
-"invalid_count":null,
-"category":
-  {"id":13569,
-  "title":"\"center\" field",
-  "created_at":"2014-02-14T02:07:43.351Z",
-  "updated_at":"2014-02-14T02:07:43.351Z",
-  "clues_count":5}}
+  window.addEventListener("load", play);
 
   /**
    * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
    */
-  function guessing() {
-    let url = URL_BASE + "?query0=/clues";
+  function play() {
+    let questionNumbers = Math.floor(Math.random() * TOTAL_QUESTION_COUNT);
+    let url = URL_BASE + "/random?value=" + questionNumbers;
     fetch(url)
       .then(checkStatus)
-      .then(JSON.parse)
+      //.then(JSON.parse)
       .then(getQuestion);
       // .then(showResult)
-      .catch(handleError);
+      // .catch(handleError);
   }
 
   /**
    * randomly get a jeoparty question for the guessing.
-   * @param {object} jeoparty - JSON object of the jeoparty question
    */
-  get a random jeoparty question for guessing
   function getQuestion(response){
     let quest = document.createElement("p");
     quest.innerText = response.question;
-    id("question").appendChild("quest");
-    jeoparty = response;
+    id("ask").appendChild(quest);
+    JEOPARTY = response;
     id("guess-btn").addEventListener("click", showResult);
   }
 
   /**
    * evaluation if the answer guessed is correct and tell the user the result
-   * @param {object} jeoparty - JSON object of the jeoparty question
    */
-  function showResult(jeoparty) {
-    let result = document.createElement("p");
-    if (id("input") ===  response.answer) {
-      result.innerText = "You get it right!";
+  function showResult() {
+    if (id("input").innerText ===  JEOPARTY.answer) {
+      id("result").innerText = "You get it right!";
     } else {
-      result.innerText = "It is wrong :(";
+      id("result").innerText = "It is wrong :( Try again";
     }
-    id("answer").appendChild(result);
   }
 
   /**
@@ -92,24 +73,6 @@
    */
   function id(idName) {
     return document.getElementById(idName);
-  }
-
-  /**
-   * Returns the first element that matches the given CSS selector.
-   * @param {string} query - CSS query selector.
-   * @returns {object} The first DOM object matching the query.
-   */
-  function qs(query) {
-    return document.querySelector(query);
-  }
-
-  /**
-   * Returns the array of elements that match the given CSS selector.
-   * @param {string} query - CSS query selector
-   * @returns {object[]} array of DOM objects matching the query.
-   */
-  function qsa(query) {
-    return document.querySelectorAll(query);
   }
 
   /**
