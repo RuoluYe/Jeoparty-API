@@ -10,11 +10,11 @@
   // MODULE GLOBAL VARIABLES, CONSTANTS, AND HELPER FUNCTIONS CAN BE PLACED
   // HERE
   const API_URL = "http://jservice.io/api"; // it's good to factor out your url base as a constant
-
+  const jeoparty;
   /**
    *  Add a function that will be called when the window is loaded.
    */
-  window.addEventListener("load", init);
+  window.addEventListener("load", guessing);
 
 {"id":101163,
 "answer":"the Rockefeller Center",
@@ -32,35 +32,51 @@
   "created_at":"2014-02-14T02:07:43.351Z",
   "updated_at":"2014-02-14T02:07:43.351Z",
   "clues_count":5}}
-  /**
-   *  initialize the jeoparty game and check the guessed answer for the
-   *  displayed question.
-   */
-  function init() {
-    document.getElementById("guess").addEventListener("click", guessing);
-  }
 
   /**
    * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
    */
   function guessing() {
-    let url = URL_BASE + "?query0=value0&query1=value1...";
+    let url = URL_BASE + "?query0=/clues";
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
-      .then(showResult)
+      .then(getQuestion);
+      // .then(showResult)
       .catch(handleError);
   }
 
   /**
-   * Step 2: Write a function to do something with the response (if successful)
-   * @param {object} response - JSON object
+   * randomly get a jeoparty question for the guessing.
+   * @param {object} jeoparty - JSON object of the jeoparty question
    */
-  function showResult(response) {
-    // responseData is string if you didn't include JSON.parse in fetch call chain, else JSON object
-    // now play with your responseData! (build DOM, display messages, etc.)
+  get a random jeoparty question for guessing
+  function getQuestion(response){
+    let quest = document.createElement("p");
+    quest.innerText = response.question;
+    id("question").appendChild("quest");
+    jeoparty = response;
+    id("guess-btn").addEventListener("click", showResult);
   }
 
+  /**
+   * evaluation if the answer guessed is correct and tell the user the result
+   * @param {object} jeoparty - JSON object of the jeoparty question
+   */
+  function showResult(jeoparty) {
+    let result = document.createElement("p");
+    if (id("input") ===  response.answer) {
+      result.innerText = "You get it right!";
+    } else {
+      result.innerText = "It is wrong :(";
+    }
+    id("answer").appendChild(result);
+  }
+
+  /**
+   *  Handle any possible error during fetch API.
+   *  @param {error} error - the erro type
+   */
   function handleError(error){
 
   }
