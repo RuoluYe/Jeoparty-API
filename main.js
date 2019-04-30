@@ -22,14 +22,16 @@
    * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
    */
   function play() {
+
     let questionNumbers = Math.floor(Math.random() * TOTAL_QUESTION_COUNT);
     let url = URL_BASE + "/random?value=" + questionNumbers;
+    console.log(url);
     fetch(url)
       .then(checkStatus)
-      //.then(JSON.parse)
-      .then(getQuestion);
+      .then(JSON.parse)
+      .then(getQuestion)
       // .then(showResult)
-      // .catch(handleError);
+      .catch(console.log);
   }
 
   /**
@@ -37,30 +39,35 @@
    */
   function getQuestion(response){
     let quest = document.createElement("p");
-    quest.innerText = response.question;
+    quest.innerText = response[0].question;
     id("ask").appendChild(quest);
-    JEOPARTY = response;
-    id("guess-btn").addEventListener("click", showResult);
+    let btn = id("guess-btn");
+    // JEOPARTY = response;
+    // id("guess-btn").addEventListener("click", showResult);
+    // console.log(JEOPARTY);
+    // console.log(JEOPARTY[0].answer);
   }
 
   /**
    * evaluation if the answer guessed is correct and tell the user the result
    */
-  function showResult() {
-    if (id("input").innerText ===  JEOPARTY.answer) {
-      id("result").innerText = "You get it right!";
-    } else {
-      id("result").innerText = "It is wrong :( Try again";
-    }
-  }
+  // function showResult() {
+  //   let answer = JEOPARTY[0].answer.toLowerCase();
+  //   let guessed = id("guess").value.toLowerCase();
+  //   if (answer ===  guessed) {
+  //     id("result").innerText = "You get it right!";
+  //   } else {
+  //     id("result").innerText = "It is wrong :( Try again";
+  //   }
+  // }
 
   /**
    *  Handle any possible error during fetch API.
-   *  @param {error} error - the erro type
+   *  @param {error} error - the error type
    */
-  function handleError(error){
-
-  }
+  // function handleError(error){
+  //
+  // }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
   // Note: You may use these in your code, but do remember that your code should not have

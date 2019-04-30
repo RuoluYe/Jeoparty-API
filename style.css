@@ -14,8 +14,6 @@ body {
 header {
   background-color: white;
   border-radius: 0.8em;
-  width: 76%;
-  margin: auto;
   padding: 10px;
   font-size: 25px;
 }
@@ -34,14 +32,14 @@ p {
 footer {
   background-color: white;
   margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
   border-radius: 0.2em;
 
 }
 
-header, footer {
-  width: 75%
+header, footer, body {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 article, section {
