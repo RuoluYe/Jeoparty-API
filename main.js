@@ -3,26 +3,29 @@
 // Section: CSE 154 AL
 //
 // This is the main.js to allow the jeparty game webstie to have interaction
-// with players using JService API.
+// with players using JService API
+//
+// queston: how do i know that JSON.parse is necessary? when it seems 
+// doing nothing.
+// question: how to write handleEroor?
 (function() {
   "use strict";
 
   // MODULE GLOBAL VARIABLES, CONSTANTS, AND HELPER FUNCTIONS CAN BE PLACED
   // HERE
-  const URL_BASE = "http://jservice.io/api"; // it's good to factor out your url base as a constant
+  const URL_BASE = "http://jservice.io/api"; // base url for Jservice API
   let JEOPARTY; // the JSON object of the trivia question
-  const TOTAL_QUESTION_COUNT = 156800;
+  const TOTAL_QUESTION_COUNT = 156800; // the total amount of possible jeoparty question
 
   /**
-   *  Add a function that will be called when the window is loaded.
+   *  When the window is loading, initialize the jeopary game setup.
    */
   window.addEventListener("load", play);
 
   /**
-   * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
+   * fetch the Jservice API for Jeoparty questions
    */
   function play() {
-
     let questionNumbers = Math.floor(Math.random() * TOTAL_QUESTION_COUNT);
     let url = URL_BASE + "/random?value=" + questionNumbers;
     console.log(url);
@@ -30,12 +33,12 @@
       .then(checkStatus)
       .then(JSON.parse)
       .then(getQuestion)
-      // .then(showResult)
       .catch(console.log);
   }
 
   /**
-   * randomly get a jeoparty question for the guessing.
+   * randomly get a jeoparty question for guessing.
+   * @param {object} response - the raw data of the jeoparty question's information
    */
   function getQuestion(response){
     let quest = document.createElement("p");
@@ -44,8 +47,6 @@
     let btn = id("guess-btn");
     JEOPARTY = response;
     id("guess-btn").addEventListener("click", showResult);
-    console.log(JEOPARTY);
-    console.log(JEOPARTY[0].answer);
   }
 
   /**
@@ -65,9 +66,9 @@
    *  Handle any possible error during fetch API.
    *  @param {error} error - the error type
    */
-  // function handleError(error){
-  //
-  // }
+  function handleError(error){
+
+  }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
   // Note: You may use these in your code, but do remember that your code should not have
