@@ -42,24 +42,24 @@
     quest.innerText = response[0].question;
     id("ask").appendChild(quest);
     let btn = id("guess-btn");
-    // JEOPARTY = response;
-    // id("guess-btn").addEventListener("click", showResult);
-    // console.log(JEOPARTY);
-    // console.log(JEOPARTY[0].answer);
+    JEOPARTY = response;
+    id("guess-btn").addEventListener("click", showResult);
+    console.log(JEOPARTY);
+    console.log(JEOPARTY[0].answer);
   }
 
   /**
    * evaluation if the answer guessed is correct and tell the user the result
    */
-  // function showResult() {
-  //   let answer = JEOPARTY[0].answer.toLowerCase();
-  //   let guessed = id("guess").value.toLowerCase();
-  //   if (answer ===  guessed) {
-  //     id("result").innerText = "You get it right!";
-  //   } else {
-  //     id("result").innerText = "It is wrong :( Try again";
-  //   }
-  // }
+  function showResult() {
+    let answer = JEOPARTY[0].answer.toLowerCase();
+    let guessed = id("guess").value.toLowerCase();
+    if (answer ===  guessed) {
+      id("result").innerText = "You get it right!";
+    } else {
+      id("result").innerText = "It is wrong :( Try again";
+    }
+  }
 
   /**
    *  Handle any possible error during fetch API.
