@@ -14,28 +14,28 @@
   const TOTAL_QUESTION_COUNT = 156800;
 
   /**
-   *  Add a function that will be called when the window is loaded.
+   *  When the webpage is loading, initialize jeoparty game
    */
   window.addEventListener("load", play);
 
   /**
-   * Step 1: Write a function to "fetch" data from a URL (possibly with query/value pairs)
+   * fetch the response.json from the server //jservice.io/api
+   * and handles error if there is one.
    */
   function play() {
-
     let questionNumbers = Math.floor(Math.random() * TOTAL_QUESTION_COUNT);
     let url = URL_BASE + "/random?value=" + questionNumbers;
-    console.log(url);
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
       .then(getQuestion)
-      // .then(showResult)
-      .catch(console.log);
+      .catch(handleError);
   }
 
   /**
    * randomly get a jeoparty question for the guessing.
+   * @param {response} response - the text version of the jeoparty question that comes back from
+   * the server.
    */
   function getQuestion(response){
     let quest = document.createElement("p");
@@ -44,12 +44,11 @@
     let btn = id("guess-btn");
     JEOPARTY = response;
     id("guess-btn").addEventListener("click", showResult);
-    console.log(JEOPARTY);
     console.log(JEOPARTY[0].answer);
   }
 
   /**
-   * evaluation if the answer guessed is correct and tell the user the result
+   * evaluation if the answer guessed is correct and tell the user the result.
    */
   function showResult() {
     let answer = JEOPARTY[0].answer.toLowerCase();
@@ -62,12 +61,14 @@
   }
 
   /**
-   *  Handle any possible error during fetch API.
-   *  @param {error} error - the error type
+   * When an error occurs in the fetch call chain, displays a user-friendly
+   * error message on the page.
+   * @param {Error} error - the error details of the request.
    */
-  // function handleError(error){
-  //
-  // }
+  function handleError(error){
+    let msg = "The question is running late, try again";
+    id("result").innerText = msg;
+  }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
   // Note: You may use these in your code, but do remember that your code should not have
