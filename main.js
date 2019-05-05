@@ -5,9 +5,6 @@
 // This is the main.js to allow the jeparty game webstie to have interaction
 // with players using JService API
 //
-// queston: how do i know that JSON.parse is necessary? when it seems
-// doing nothing.
-// question: how to write handleEroor?
 (function() {
   "use strict";
 
@@ -40,7 +37,6 @@
    * the server.
    */
   function getQuestion(response) {
-    h=s;
     let quest = document.createElement("p");
     quest.innerText = response[0].question;
     id("ask").appendChild(quest);
