@@ -3,24 +3,36 @@
 // Section: CSE 154 AL
 //
 // This is the main.js to allow the jeparty game webstie to have interaction
-// with players using JService API.
+// with players using JService API
+//
+// queston: how do i know that JSON.parse is necessary? when it seems 
+// doing nothing.
+// question: how to write handleEroor?
 (function() {
   "use strict";
 
   // MODULE GLOBAL VARIABLES, CONSTANTS, AND HELPER FUNCTIONS CAN BE PLACED
   // HERE
-  const URL_BASE = "http://jservice.io/api"; // it's good to factor out your url base as a constant
+  const URL_BASE = "http://jservice.io/api"; // base url for Jservice API
   let JEOPARTY; // the JSON object of the trivia question
-  const TOTAL_QUESTION_COUNT = 156800;
+  const TOTAL_QUESTION_COUNT = 156800; // the total amount of possible jeoparty question
 
   /**
+<<<<<<< HEAD
    *  When the webpage is loading, initialize jeoparty game
+=======
+   *  When the window is loading, initialize the jeopary game setup.
+>>>>>>> 15e24d0272ada01f08537913e5a4ea07f63e3352
    */
   window.addEventListener("load", play);
 
   /**
+<<<<<<< HEAD
    * fetch the response.json from the server //jservice.io/api
    * and handles error if there is one.
+=======
+   * fetch the Jservice API for Jeoparty questions
+>>>>>>> 15e24d0272ada01f08537913e5a4ea07f63e3352
    */
   function play() {
     let questionNumbers = Math.floor(Math.random() * TOTAL_QUESTION_COUNT);
@@ -29,6 +41,7 @@
       .then(checkStatus)
       .then(JSON.parse)
       .then(getQuestion)
+<<<<<<< HEAD
       .catch(handleError);
   }
 
@@ -36,6 +49,14 @@
    * randomly get a jeoparty question for the guessing.
    * @param {response} response - the text version of the jeoparty question that comes back from
    * the server.
+=======
+      .catch(console.log);
+  }
+
+  /**
+   * randomly get a jeoparty question for guessing.
+   * @param {object} response - the raw data of the jeoparty question's information
+>>>>>>> 15e24d0272ada01f08537913e5a4ea07f63e3352
    */
   function getQuestion(response){
     let quest = document.createElement("p");
@@ -44,7 +65,10 @@
     let btn = id("guess-btn");
     JEOPARTY = response;
     id("guess-btn").addEventListener("click", showResult);
+<<<<<<< HEAD
     console.log(JEOPARTY[0].answer);
+=======
+>>>>>>> 15e24d0272ada01f08537913e5a4ea07f63e3352
   }
 
   /**
@@ -66,8 +90,12 @@
    * @param {Error} error - the error details of the request.
    */
   function handleError(error){
+<<<<<<< HEAD
     let msg = "The question is running late, try again";
     id("result").innerText = msg;
+=======
+
+>>>>>>> 15e24d0272ada01f08537913e5a4ea07f63e3352
   }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
