@@ -1,0 +1,58 @@
+/*
+  Name: Ruolu Ye
+  Date: April 29th 2019
+  Section: CSE154 AL
+
+  This is the style.css page for the index.html.
+  It is used to give the site a beautiful and organzing look.
+*/
+body {
+  background-color: #b5dbec;
+  text-align: center;
+}
+
+header {
+  background-color: white;
+  border-radius: 0.8em;
+  padding: 10px;
+  font-size: 25px;
+}
+
+section {
+  border: 2px solid #5394b2;
+  padding: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+p {
+  border: dashed 2px #818fe9;
+}
+
+footer {
+  background-color: white;
+  margin-top: 50px;
+  border-radius: 0.2em;
+
+}
+
+header, footer, body {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+article, section {
+  margin-top: 10px;
+}
+
+#guess {
+  width: 100px;
+  height: 10px;
+
+}
+
+#answer {
+  display: flex;
+  flex-direction: column;
+}
